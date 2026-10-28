@@ -113,7 +113,7 @@ settings are job options:
 | Job option         | Default                                   |
 |--------------------|-------------------------------------------|
 | `ocr-language`     | `eng`, Tesseract codes, `eng+deu` combines |
-| `ocr-engine`       | Ghostscript's default (LSTM); 0, 1, 2     |
+| `ocr-engine`       | 0 = Tesseract default, 1 = LSTM only, 2 = legacy only, 3 = both |
 | `ocr-fallback`     | `true`: raster-only PDF if OCR fails       |
 | `ocr-resolution`   | 300 dpi (or `printer-resolution`)          |
 | `ocr-tessdata-dir` | auto-detected                              |
@@ -150,10 +150,12 @@ time.
 ### Languages
 
 Tesseract language codes are three letters (`eng`, `deu`, `fra`,
-`chi_sim`, ...), several can be combined with `+`. Combining languages
-did not always give the expected result with Ghostscript 10.02 in our
-tests, so prefer the main language of the document. Recognition is
-done at the rendering resolution, 300 dpi is a good value for OCR.
+`chi_sim`, ...), several can be combined with `+`. With the "fast"
+language packs of the distributions a combination tends to favor the
+first language (this is Tesseract's behavior, Ghostscript passes the
+string on unchanged), so prefer the main language of the document or
+install the "best" packs. Recognition is done at the rendering
+resolution, 300 dpi is a good value for OCR.
 
 ## DEVELOPMENT AND CI/CD
 
